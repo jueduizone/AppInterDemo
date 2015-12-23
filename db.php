@@ -47,6 +47,7 @@ class db{
                 throw new Exception('啊哦,好像数据库连接出了点问题...');
             }
         }
+        self::$_connectSource->query("SET NAMES UTF8");
         return self::$_connectSource;
     }
 }
