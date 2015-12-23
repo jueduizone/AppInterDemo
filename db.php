@@ -8,12 +8,12 @@
 class db{
     static private $_instance;
     static private $_connectSource;
-    private $_dbConfig = array(
-        'host'=>'127.0.0.1:3307',
-        'user'=>'root',
-        'password'=>'root',
-        'database'=>'test'
-    );
+    private $_dbms = 'mysql';
+    private $_host = '127.0.0.1:3307';
+    private $_user = 'root';
+    private $_password = 'mysqlroot';
+    private $_database = 'cnjyzEnter';
+
     /**
      * 构造方法私有化,防止进行实例化
      */
@@ -27,12 +27,35 @@ class db{
      * @since: 2015年12月22日19:34:47
      * @version: 1.0
      */
-    public function getInstance(){
-
+    public static function getInstance(){
+        if(self::$_instance instanceof self){
+            return self::$_instance;
+        }
+        return self::$_instance = new self();
     }
+
     //连接数据库
     public function getConnect(){
-
-
+        if(!self::$_connectSource){
+            try{
+                self::$_connectSource = new PDO(
+                    "$this->_dbms:host=$this->_host;$this->_database",
+                    $this->_user,
+                    $this->_password);
+            }catch (PDOException $e){
+                //throw new Exception('连接数据库失败!请重试!'.$e->getMessage());
+                throw new Exception('啊哦,好像数据库连接出了点问题...');
+            }
+        }
+        return self::$_connectSource;
     }
 }
+
+$db = db::getInstance();
+try{
+    $db->getConnect();
+}catch (Exception $e){
+    echo $e->getMessage();
+}
+
+
