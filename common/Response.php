@@ -30,11 +30,11 @@ class Response {
     }
 }
 
-Response::getReturn(200,'Test',array(
-    'aa'=>'asdasd',
-    'name'=>'许银',
-    'hobbit'=>array(
-        'name'=>'许银',
-        '足球'
-    )
-));
+//Response::getReturn(200,'Test',array(
+//    'aa'=>'asdasd',
+//    'name'=>'许银',
+//    'hobbit'=>array(
+//        'name'=>'许银',
+//        '足球'
+//    )
+//));

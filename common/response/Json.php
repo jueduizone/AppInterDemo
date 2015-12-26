@@ -25,7 +25,7 @@ class Json extends ApiParent{
            'message'=>$message,
            'data'=>$data
          );
-
+         //echo header("Content-Type:text/json");
          echo json_encode($result);
          exit;
     }

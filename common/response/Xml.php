@@ -23,14 +23,17 @@ class Xml{
             'message'=>$message,
             'data'=>$data
         );
-        header('Content-Type:text/xml');
+        //echo '进来了';
+        echo header('Content-Type:text/xml');
         $xmlStr = "<?xml version='1.0' encoding='UTF-8'?>\n";
-        $xmlStr .= $this->xmlStr($result);
+        // XML文件必须包含根元素
+        $xmlStr .= "<root>\n";
+        $xmlStr .= self::xmlStr($result);
+        $xmlStr .= "</root>";
         echo  $xmlStr;
-        exit;
     }
 
-    public function xmlStr($result){
+    public static function xmlStr($result){
         $xmlStr = $attr = '';
         foreach($result as $key => $value){
             if(is_numeric($key)){
@@ -39,7 +42,7 @@ class Xml{
             }
             $xmlStr .= "<{$key}{$attr}>";
             $attr='';           //防止非全部指定ID时,$attr属性被继续使用
-            $xmlStr .= is_array($value) ? $this->xmlStr($value) : $value;
+            $xmlStr .= is_array($value) ? self::xmlStr($value) : $value;
             $xmlStr .= "</{$key}>\n";
         }
             return $xmlStr ;

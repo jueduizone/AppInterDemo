@@ -19,11 +19,11 @@ abstract class ApiParent{
     public static function factory($type = self::JSON){
         $type = isset($_POST['format'])?$_POST['format']:$type;
         $resultClass=ucwords($type);
-        if($resultClass==self::JSON || $resultClass==self::JSON){
-            require_once('./response/'.$type.'.php');
+        if($resultClass==self::JSON || $resultClass==self::XML){
+            require_once('../common/response/'.$type.'.php');
             return new $resultClass;
         }else{
-            return '';
+            return false;
             exit;
         }
 
