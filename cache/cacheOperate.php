@@ -6,7 +6,7 @@
  * Date: 15/12/23
  * Time: 下午12:01
  */
-class cacheOperate
+class CacheOperate
 {
     //文件路径和后缀名
     private $_dir;

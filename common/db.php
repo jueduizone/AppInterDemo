@@ -12,7 +12,7 @@ class db{
     private $_host = '127.0.0.1:3307';
     private $_user = 'root';
     private $_password = 'mysqlroot';
-    private $_database = 'cnjyzEnter';
+    private $_database = 'test';
 
     /**
      * 构造方法私有化,防止进行实例化
@@ -39,7 +39,7 @@ class db{
         if(!self::$_connectSource){
             try{
                 self::$_connectSource = new PDO(
-                    "$this->_dbms:host=$this->_host;$this->_database",
+                    "$this->_dbms:host=$this->_host;dbname=$this->_database",
                     $this->_user,
                     $this->_password);
             }catch (PDOException $e){
@@ -52,11 +52,11 @@ class db{
     }
 }
 
-$db = db::getInstance();
-try{
-    $db->getConnect();
-}catch (Exception $e){
-    echo $e->getMessage();
-}
-
+//$db = db::getInstance();
+//try{
+//    $db->getConnect();
+//}catch (Exception $e){
+//    echo $e->getMessage();
+//}
+//
 

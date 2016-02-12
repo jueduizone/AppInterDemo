@@ -8,11 +8,10 @@
 require_once('../common/Response.php');
 require_once('../common/Db.php');
 require_once('../cache/MemcacheOperate.php');
-error_reporting (E_ALL & ~E_NOTICE);
 class GetInfo{
     public function returnInfo(){
         $id = $_POST['userid'];
-        $format = $_POST['format'];
+        $format = is_null($_POST['format'])?'json':$_POST['format'];
         $db = Db::getInstance();
         try{
             $dbConn = $db->getConnect();
